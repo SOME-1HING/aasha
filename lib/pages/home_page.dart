@@ -1,7 +1,8 @@
-import 'package:aasha/components/bottom_nav.dart';
 import 'package:aasha/components/featured_card.dart';
+import 'package:aasha/components/ngo_card.dart';
 import 'package:aasha/components/top_story.dart';
 import 'package:aasha/module/featured_card_model.dart';
+import 'package:aasha/module/ngo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +20,18 @@ class _HomePageState extends State<HomePage> {
   late bool isPanelOpen;
   late final PanelController panelController;
   final GlobalKey<ScaffoldState> _key = GlobalKey();
+  String currActivePage = "Home";
+  int active = 0;
+
+  Color getColor(int button) {
+    return active == button ? Color(0xFF4CBC9A) : Color(0xFF979C9E);
+  }
+
+  void setActive(int button) {
+    setState(() {
+      active = button;
+    });
+  }
 
   final List<Featured> demo = [
     Featured(
@@ -41,7 +54,73 @@ class _HomePageState extends State<HomePage> {
         uid: "fehfiu3ggug2f9udg9ug"),
   ];
 
-  String active = "Home";
+  final List<NgoModel> ngoDemo = [
+    NgoModel(
+        ngo_image_url: "./assets/images/home_top.png",
+        name: "Hfefedf fdvbfded",
+        location: "fgrgr",
+        description: "fregvdcdvx",
+        is_verified: true,
+        mobile: "+913425424234",
+        email: "fregvedsgfd@ghibjfid.com",
+        ngo_website: "https://dwefcw.com",
+        twitter_url: "fgrgr.com",
+        insta_url: "fedfe.com",
+        fb_url: "ferdedv.com",
+        uid: "234ewy72t7qw8sy8qg82"),
+    NgoModel(
+        ngo_image_url: "./assets/images/home_top.png",
+        name: "Hfefedf",
+        location: "fgrgr",
+        description: "fregvdcdvx",
+        is_verified: true,
+        mobile: "+913425424234",
+        email: "fregvedsgfd@ghibjfid.com",
+        ngo_website: "https://dwefcw.com",
+        twitter_url: "fgrgr.com",
+        insta_url: "fedfe.com",
+        fb_url: "ferdedv.com",
+        uid: "234ewy72t7qw8sy8qg82"),
+    NgoModel(
+        ngo_image_url: "./assets/images/home_top.png",
+        name: "Hfefedf",
+        location: "fgrgr",
+        description: "fregvdcdvx",
+        is_verified: true,
+        mobile: "+913425424234",
+        email: "fregvedsgfd@ghibjfid.com",
+        ngo_website: "https://dwefcw.com",
+        twitter_url: "fgrgr.com",
+        insta_url: "fedfe.com",
+        fb_url: "ferdedv.com",
+        uid: "234ewy72t7qw8sy8qg82"),
+    NgoModel(
+        ngo_image_url: "./assets/images/home_top.png",
+        name: "Hfefedf",
+        location: "fgrgr",
+        description: "fregvdcdvx",
+        is_verified: true,
+        mobile: "+913425424234",
+        email: "fregvedsgfd@ghibjfid.com",
+        ngo_website: "https://dwefcw.com",
+        twitter_url: "fgrgr.com",
+        insta_url: "fedfe.com",
+        fb_url: "ferdedv.com",
+        uid: "234ewy72t7qw8sy8qg82"),
+    NgoModel(
+        ngo_image_url: "./assets/images/home_top.png",
+        name: "Hfefedf",
+        location: "fgrgr",
+        description: "fregvdcdvx",
+        is_verified: true,
+        mobile: "+913425424234",
+        email: "fregvedsgfd@ghibjfid.com",
+        ngo_website: "https://dwefcw.com",
+        twitter_url: "fgrgr.com",
+        insta_url: "fedfe.com",
+        fb_url: "ferdedv.com",
+        uid: "234ewy72t7qw8sy8qg82"),
+  ];
 
   @override
   void initState() {
@@ -65,268 +144,455 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Stack(
-          children: [
-            Image(
-              image: AssetImage(
-                "./assets/images/home_top.png",
-              ),
-              opacity: const AlwaysStoppedAnimation(.5),
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
-            SlidingUpPanel(
-                onPanelOpened: () {
-                  setState(() {
-                    isPanelOpen = true;
-                  });
-                },
-                onPanelClosed: () {
-                  setState(() {
-                    isPanelOpen = false;
-                  });
-                },
-                minHeight: MediaQuery.of(context).size.height - 300,
-                maxHeight: MediaQuery.of(context).size.height,
-                borderRadius: isPanelOpen
-                    ? BorderRadius.zero
-                    : const BorderRadius.only(
-                        topRight: Radius.circular(32),
-                        topLeft: Radius.circular(32)),
-                controller: panelController,
-                panelBuilder: () {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top + kToolbarHeight,
+        child: (active == 0)
+            ? Stack(
+                children: [
+                  Image(
+                    image: AssetImage(
+                      "./assets/images/home_top.png",
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 26.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      InkWell(
-                                          onTap: () {},
-                                          child: Container(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Image.asset(
-                                                  "./assets/icons/menu/menu1.png",
-                                                  width: 50,
-                                                  height: 50,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                                Text(
-                                                  "All",
-                                                  style: GoogleFonts.roboto(
-                                                      fontSize: 16,
-                                                      color: Color(0xFF9CA5BB)),
-                                                )
-                                              ],
-                                            ),
-                                          )),
-                                      InkWell(
-                                          onTap: () {},
-                                          child: Container(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Image.asset(
-                                                  "./assets/icons/menu/menu2.png",
-                                                  width: 50,
-                                                  height: 50,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                                Text(
-                                                  "Education",
-                                                  style: GoogleFonts.roboto(
-                                                      fontSize: 16,
-                                                      color: Color(0xFF9CA5BB)),
-                                                )
-                                              ],
-                                            ),
-                                          )),
-                                      InkWell(
-                                          onTap: () {},
-                                          child: Container(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Image.asset(
-                                                  "./assets/icons/menu/menu3.png",
-                                                  width: 50,
-                                                  height: 50,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                                Text(
-                                                  "Health",
-                                                  style: GoogleFonts.roboto(
-                                                      fontSize: 16,
-                                                      color: Color(0xFF9CA5BB)),
-                                                )
-                                              ],
-                                            ),
-                                          )),
-                                      InkWell(
-                                          onTap: () {},
-                                          child: Container(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Image.asset(
-                                                  "./assets/icons/menu/menu4.png",
-                                                  width: 50,
-                                                  height: 50,
-                                                  fit: BoxFit.contain,
-                                                ),
-                                                Text(
-                                                  "Animals",
-                                                  style: GoogleFonts.roboto(
-                                                      fontSize: 16,
-                                                      color: Color(0xFF9CA5BB)),
-                                                )
-                                              ],
-                                            ),
-                                          ))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 14,
-                              ),
-                            ],
+                    opacity: const AlwaysStoppedAnimation(.5),
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
+                  SlidingUpPanel(
+                      onPanelOpened: () {
+                        setState(() {
+                          isPanelOpen = true;
+                        });
+                      },
+                      onPanelClosed: () {
+                        setState(() {
+                          isPanelOpen = false;
+                        });
+                      },
+                      minHeight: MediaQuery.of(context).size.height - 300,
+                      maxHeight: MediaQuery.of(context).size.height,
+                      borderRadius: isPanelOpen
+                          ? BorderRadius.zero
+                          : const BorderRadius.only(
+                              topRight: Radius.circular(32),
+                              topLeft: Radius.circular(32)),
+                      controller: panelController,
+                      panelBuilder: () {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).padding.top +
+                                kToolbarHeight,
                           ),
-                        ),
-                        Expanded(
-                          child: ListView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 26.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      "Top Stories",
-                                      style: GoogleFonts.ramabhadra(
-                                        fontSize: 24,
+                                    Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 26.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            InkWell(
+                                                onTap: () {},
+                                                child: Container(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Image.asset(
+                                                        "./assets/icons/menu/menu1.png",
+                                                        width: 50,
+                                                        height: 50,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      Text(
+                                                        "All",
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 16,
+                                                                color: Color(
+                                                                    0xFF9CA5BB)),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )),
+                                            InkWell(
+                                                onTap: () {},
+                                                child: Container(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Image.asset(
+                                                        "./assets/icons/menu/menu2.png",
+                                                        width: 50,
+                                                        height: 50,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      Text(
+                                                        "Education",
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 16,
+                                                                color: Color(
+                                                                    0xFF9CA5BB)),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )),
+                                            InkWell(
+                                                onTap: () {},
+                                                child: Container(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Image.asset(
+                                                        "./assets/icons/menu/menu3.png",
+                                                        width: 50,
+                                                        height: 50,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      Text(
+                                                        "Health",
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 16,
+                                                                color: Color(
+                                                                    0xFF9CA5BB)),
+                                                      )
+                                                    ],
+                                                  ),
+                                                )),
+                                            InkWell(
+                                                onTap: () {},
+                                                child: Container(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Image.asset(
+                                                        "./assets/icons/menu/menu4.png",
+                                                        width: 50,
+                                                        height: 50,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                      Text(
+                                                        "Animals",
+                                                        style:
+                                                            GoogleFonts.roboto(
+                                                                fontSize: 16,
+                                                                color: Color(
+                                                                    0xFF9CA5BB)),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ))
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    Text(
-                                      "View all",
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 16,
-                                          color: Color(0xFF4CBC9A)),
-                                    )
+                                    SizedBox(
+                                      height: 14,
+                                    ),
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 12,
-                              ),
-                              TopStory(),
-                              SizedBox(
-                                height: 14,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              Expanded(
+                                child: ListView(
                                   children: [
-                                    Text(
-                                      "Featured goals",
-                                      style: GoogleFonts.ramabhadra(
-                                        fontSize: 24,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 26.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            "Top Stories",
+                                            style: GoogleFonts.ramabhadra(
+                                              fontSize: 24,
+                                            ),
+                                          ),
+                                          Text(
+                                            "View all",
+                                            style: GoogleFonts.roboto(
+                                                fontSize: 16,
+                                                color: Color(0xFF4CBC9A)),
+                                          )
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
                                       height: 12,
                                     ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 350,
-                                      child: ListView(
-                                        // This next line does the trick.
-                                        scrollDirection: Axis.horizontal,
-                                        children: <Widget>[
-                                          for (int i = 0; i < demo.length; i++)
-                                            FeaturedCard(feature: demo[i])
+                                    TopStory(),
+                                    SizedBox(
+                                      height: 14,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 16),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Featured goals",
+                                            style: GoogleFonts.ramabhadra(
+                                              fontSize: 24,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 12,
+                                          ),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 350,
+                                            child: ListView(
+                                              // This next line does the trick.
+                                              scrollDirection: Axis.horizontal,
+                                              children: <Widget>[
+                                                for (int i = 0;
+                                                    i < demo.length;
+                                                    i++)
+                                                  FeaturedCard(feature: demo[i])
+                                              ],
+                                            ),
+                                          )
                                         ],
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
+                              SizedBox(
+                                height: 80,
+                              )
                             ],
                           ),
+                        );
+                      },
+                      color: const Color(0xFFFFFFFF)),
+                  Container(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).viewPadding.top),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              _key.currentState!.openDrawer();
+                            },
+                            icon: Image.asset(
+                              color: isPanelOpen ? Colors.black : Colors.white,
+                              "./assets/icons/menu.png",
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isNotification = !isNotification;
+                              });
+                            },
+                            icon: Image.asset(
+                              color: isPanelOpen ? Colors.black : Colors.white,
+                              isNotification
+                                  ? "./assets/icons/notifi2.png"
+                                  : "./assets/icons/notifi1.png",
+                              scale: 0.7,
+                            ),
+                          ),
+                        ]),
+                  ),
+                ],
+              )
+            : (active == 1)
+                ? Stack(
+                    children: [
+                      Container(
+                        color: Colors.white,
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 180,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Top Communities",
+                                    style: GoogleFonts.prompt(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Discover top communities of this week",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(top: 20),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 200,
+                                    child: ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: ngoDemo.length,
+                                      separatorBuilder: (context, index) =>
+                                          Container(
+                                              width: 25,
+                                              height: 100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    height: 150,
+                                                    width: 2,
+                                                    color: Color(0xFF4CBC9A)
+                                                        .withOpacity(0.45),
+                                                  )
+                                                ],
+                                              )), // Adjust separator width as needed
+                                      itemBuilder: (context, index) {
+                                        return NgoCard(
+                                          ngoModel: ngoDemo[index],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  Text("Local Organizations"),
+                                  Text(
+                                      "Get to know the organization nearest to you...")
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          height: 80,
-                        )
-                      ],
-                    ),
-                  );
-                },
-                color: const Color(0xFFFFFFFF)),
-            Container(
-              padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        _key.currentState!.openDrawer();
-                      },
-                      icon: Image.asset(
-                        color: isPanelOpen ? Colors.black : Colors.white,
-                        "./assets/icons/menu.png",
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isNotification = !isNotification;
-                        });
-                      },
-                      icon: Image.asset(
-                        color: isPanelOpen ? Colors.black : Colors.white,
-                        isNotification
-                            ? "./assets/icons/notifi2.png"
-                            : "./assets/icons/notifi1.png",
-                        scale: 0.7,
+                      Container(
+                        height: 150,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey
+                                    .withOpacity(0.5), // Shadow color
+                                spreadRadius: 5, // Spread radius
+                                blurRadius: 7, // Blur radius
+                                offset: Offset(0, 2), // Offset
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(36))),
+                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).viewPadding.top),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _key.currentState!.openDrawer();
+                                },
+                                icon: Image.asset(
+                                  color: Colors.black,
+                                  "./assets/icons/menu.png",
+                                ),
+                              ),
+                              Text(
+                                "Discover",
+                                style: GoogleFonts.prompt(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFF54BF9F)),
+                              )
+                            ]),
                       ),
-                    ),
-                  ]),
+                    ],
+                  )
+                : Stack(
+                    children: [],
+                  ),
+      ),
+      backgroundColor: Colors.grey,
+      bottomNavigationBar: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 60,
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 6),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5), // Shadow color
+              spreadRadius: 5, // Spread radius
+              blurRadius: 7, // Blur radius
+              offset: Offset(0, 5), // Offset
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                setActive(0);
+              },
+              icon: Image.asset(
+                "./assets/icons/home.png",
+                color: getColor(0),
+                width: 84,
+                height: 84,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                setActive(1);
+              },
+              icon: Image.asset(
+                "./assets/icons/contri.png",
+                color: getColor(1),
+                width: 84,
+                height: 84,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                setActive(2);
+              },
+              icon: Image.asset(
+                "./assets/icons/user.png",
+                color: getColor(2),
+                width: 84,
+                height: 84,
+              ),
             ),
           ],
         ),
       ),
-      backgroundColor: Colors.grey,
-      bottomNavigationBar: BottomNav(myString: "ds"),
       drawer: Drawer(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(topRight: Radius.circular(50))),
@@ -375,7 +641,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        color: (active == "Home")
+                        color: (currActivePage == "Home")
                             ? Colors.white.withOpacity(0.3)
                             : Colors.transparent,
                       ),
@@ -404,7 +670,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        color: (active == "Settings")
+                        color: (currActivePage == "Settings")
                             ? Colors.white.withOpacity(0.3)
                             : Colors.transparent,
                       ),
@@ -433,7 +699,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        color: (active == "My Activities")
+                        color: (currActivePage == "My Activities")
                             ? Colors.white.withOpacity(0.3)
                             : Colors.transparent,
                       ),
@@ -462,7 +728,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        color: (active == "About Us")
+                        color: (currActivePage == "About Us")
                             ? Colors.white.withOpacity(0.3)
                             : Colors.transparent,
                       ),
@@ -491,7 +757,7 @@ class _HomePageState extends State<HomePage> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        color: (active == "Help & FAQ")
+                        color: (currActivePage == "Help & FAQ")
                             ? Colors.white.withOpacity(0.3)
                             : Colors.transparent,
                       ),
