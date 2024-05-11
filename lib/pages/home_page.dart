@@ -57,9 +57,10 @@ class _HomePageState extends State<HomePage> {
   final List<NgoModel> ngoDemo = [
     NgoModel(
         ngo_image_url: "./assets/images/home_top.png",
-        name: "Hfefedf fdvbfded",
-        location: "fgrgr",
-        description: "fregvdcdvx",
+        name: "HopeLink Foundation",
+        location: "Mumbai, India",
+        description:
+            "\"Bringing hope to every corner of Mumbai. Join us in our mission to uplift lives, one heart at a time. Together, we're making a difference. 💙 #HopeLinkFoundation #MumbaiCares\"",
         is_verified: true,
         mobile: "+913425424234",
         email: "fregvedsgfd@ghibjfid.com",
@@ -349,7 +350,7 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Featured goals",
+                                            "Seeking Investment",
                                             style: GoogleFonts.ramabhadra(
                                               fontSize: 24,
                                             ),
@@ -483,9 +484,55 @@ class _HomePageState extends State<HomePage> {
                                       },
                                     ),
                                   ),
-                                  Text("Local Organizations"),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
                                   Text(
-                                      "Get to know the organization nearest to you...")
+                                    "Local Organizations",
+                                    style: GoogleFonts.prompt(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Get to know the organization nearest to you...",
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(top: 20),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 200,
+                                    child: ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: ngoDemo.length,
+                                      separatorBuilder: (context, index) =>
+                                          Container(
+                                              width: 25,
+                                              height: 100,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    height: 150,
+                                                    width: 2,
+                                                    color: Color(0xFF4CBC9A)
+                                                        .withOpacity(0.45),
+                                                  )
+                                                ],
+                                              )), // Adjust separator width as needed
+                                      itemBuilder: (context, index) {
+                                        return NgoCard(
+                                          ngoModel: ngoDemo[index],
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ],
                               ),
                             )
