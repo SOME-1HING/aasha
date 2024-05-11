@@ -28,14 +28,12 @@ class FilledTextField extends StatelessWidget {
         ),
         filled: true,
         fillColor: Colors.white60,
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black45, width: 2.0),
+            borderRadius: BorderRadius.circular(12)),
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.black45, width: 2.0),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black45, width: 2.0),
-        ),
-        focusedErrorBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, width: 2.0),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     );

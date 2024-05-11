@@ -23,8 +23,8 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  width: MediaQuery.of(context).size.width,
                   "assets/images/curve_white.png",
+                  width: MediaQuery.of(context).size.width,
                   fit: BoxFit.contain,
                 )
               ],
