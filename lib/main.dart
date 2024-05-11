@@ -10,7 +10,9 @@ import 'provider/google_sign_in.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

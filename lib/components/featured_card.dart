@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FeaturedCard extends StatefulWidget {
-  final Featured feature;
+  final ProjectModel feature;
   const FeaturedCard({Key? key, required this.feature}) : super(key: key);
 
   @override
@@ -56,7 +56,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.asset(
-                        this.widget.feature.imgUrl,
+                        this.widget.feature.projectBackdrop,
                         fit: BoxFit.cover,
                       ))),
               Padding(
@@ -69,7 +69,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
                       child: ClipOval(
                         child: Image.asset(
                           fit: BoxFit.cover,
-                          "./assets/images/home_top.png",
+                          "./assets/images/cuss.png",
                         ),
                       ),
                     ),
@@ -77,7 +77,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
                       width: 10,
                     ),
                     Text(
-                      this.widget.feature.handle,
+                      this.widget.feature.ngoName,
                       style: GoogleFonts.prompt(fontSize: 16),
                     ),
                   ],
@@ -87,7 +87,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    this.widget.feature.title,
+                    this.widget.feature.projectName,
                     style: GoogleFonts.prompt(fontSize: 14),
                   ),
                   InkWell(

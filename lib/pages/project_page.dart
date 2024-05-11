@@ -58,7 +58,7 @@ class _ProjectPageState extends State<ProjectPage> {
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                       child: Image.asset(
-                        "./assets/images/cause.png",
+                        "./assets/images/proj.png",
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -69,8 +69,10 @@ class _ProjectPageState extends State<ProjectPage> {
                 ),
                 Text(
                   this.widget.projModel.projectDescription,
-                  style: GoogleFonts.prompt(
-                      fontSize: 14, fontWeight: FontWeight.w300),
+                  style: GoogleFonts.poppins(
+                    color: Color(0xFF868889),
+                    fontSize: 18,
+                  ),
                 ),
                 SizedBox(
                   height: 32,
@@ -108,6 +110,7 @@ class _ProjectPageState extends State<ProjectPage> {
                         width: 128,
                         height: 128,
                         decoration: BoxDecoration(
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(128),
                             border:
                                 Border.all(width: 2, color: Color(0xFF4CBC9A))),

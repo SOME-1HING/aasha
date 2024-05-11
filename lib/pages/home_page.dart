@@ -3,6 +3,8 @@ import 'package:aasha/components/ngo_card.dart';
 import 'package:aasha/components/top_story.dart';
 import 'package:aasha/module/featured_card_model.dart';
 import 'package:aasha/module/ngo_model.dart';
+import 'package:aasha/pages/health_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,26 +35,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  final List<Featured> demo = [
-    Featured(
-        handle: "dhatripatra",
-        handleUrl: "./assets/images/logo.png",
-        imgUrl: "./assets/images/home_top.png",
-        title: "Empowering hearts to end hunger, one donation at a time",
-        uid: "fehfiu3ggug2f9udg9ug"),
-    Featured(
-        handle: "dhatripatra",
-        handleUrl: "./assets/images/logo.png",
-        imgUrl: "./assets/images/home_top.png",
-        title: "fcre hearts to end hunger, one donation at a time",
-        uid: "fehfiu3ggug2f9udg9ug"),
-    Featured(
-        handle: "dhatripatra",
-        handleUrl: "./assets/images/logo.png",
-        imgUrl: "./assets/images/home_top.png",
-        title: "Empowering hearts to end hunger, one donation at a time",
-        uid: "fehfiu3ggug2f9udg9ug"),
-  ];
+  late List<Featured> demo;
 
   final List<NgoModel> ngoDemo = [
     NgoModel(
@@ -123,6 +106,16 @@ class _HomePageState extends State<HomePage> {
         uid: "234ewy72t7qw8sy8qg82"),
   ];
 
+  void getDb() async {
+    var db = FirebaseFirestore.instance;
+
+    await db.collection("projects").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} => ${doc.data()}");
+      }
+    });
+  }
+
   @override
   void initState() {
     setState(() {
@@ -134,7 +127,7 @@ class _HomePageState extends State<HomePage> {
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: Colors.black,
         systemNavigationBarIconBrightness: Brightness.light));
-
+    getDb();
     super.initState();
   }
 
@@ -250,7 +243,13 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 )),
                                             InkWell(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              HealthPage()));
+                                                },
                                                 child: Container(
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -367,10 +366,10 @@ class _HomePageState extends State<HomePage> {
                                               // This next line does the trick.
                                               scrollDirection: Axis.horizontal,
                                               children: <Widget>[
-                                                for (int i = 0;
+                                                /*        for (int i = 0;
                                                     i < demo.length;
                                                     i++)
-                                                  FeaturedCard(feature: demo[i])
+                                                  FeaturedCard(feature: demo[i])*/
                                               ],
                                             ),
                                           )

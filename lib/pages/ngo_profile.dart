@@ -116,8 +116,8 @@ class _NgoProfileState extends State<NgoProfile> {
                     // This next line does the trick.
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
-                      for (int i = 0; i < demo.length; i++)
-                        FeaturedCard(feature: demo[i])
+                      // for (int i = 0; i < demo.length; i++)
+                      //   FeaturedCard(feature: demo[i])
                     ],
                   ),
                 ),
