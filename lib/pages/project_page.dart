@@ -1,13 +1,14 @@
 import 'package:aasha/components/featured_card.dart';
 import 'package:aasha/module/featured_card_model.dart';
 import 'package:aasha/module/ngo_model.dart';
+import 'package:aasha/module/project_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProjectPage extends StatefulWidget {
-  final NgoModel ngoModel;
+  final ProjectModel projModel;
 
-  const ProjectPage({Key? key, required this.ngoModel}) : super(key: key);
+  const ProjectPage({Key? key, required this.projModel}) : super(key: key);
 
   @override
   State<ProjectPage> createState() => _ProjectPageState();
@@ -27,27 +28,6 @@ class _ProjectPageState extends State<ProjectPage> {
     });
   }
 
-  final List<Featured> demo = [
-    Featured(
-        handle: "dhatripatra",
-        handleUrl: "./assets/images/logo.png",
-        imgUrl: "./assets/images/home_top.png",
-        title: "Empowering hearts to end hunger, one donation at a time",
-        uid: "fehfiu3ggug2f9udg9ug"),
-    Featured(
-        handle: "dhatripatra",
-        handleUrl: "./assets/images/logo.png",
-        imgUrl: "./assets/images/home_top.png",
-        title: "fcre hearts to end hunger, one donation at a time",
-        uid: "fehfiu3ggug2f9udg9ug"),
-    Featured(
-        handle: "dhatripatra",
-        handleUrl: "./assets/images/logo.png",
-        imgUrl: "./assets/images/home_top.png",
-        title: "Empowering hearts to end hunger, one donation at a time",
-        uid: "fehfiu3ggug2f9udg9ug"),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,27 +42,14 @@ class _ProjectPageState extends State<ProjectPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  this.widget.ngoModel.name,
+                  this.widget.projModel.projectName,
                   style: GoogleFonts.prompt(
                       color: Color(0xFF4CBC9A),
                       fontSize: 32,
                       fontWeight: FontWeight.w500),
                 ),
-                Text(
-                  this.widget.ngoModel.location,
-                  style: GoogleFonts.prompt(
-                      fontSize: 14, fontWeight: FontWeight.w200),
-                ),
                 SizedBox(
                   height: 10,
-                ),
-                Text(
-                  this.widget.ngoModel.description,
-                  style: GoogleFonts.prompt(
-                      fontSize: 14, fontWeight: FontWeight.w300),
-                ),
-                SizedBox(
-                  height: 16,
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(16),
@@ -98,139 +65,21 @@ class _ProjectPageState extends State<ProjectPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 32,
-                ),
-                Text(
-                  "Seeking Investment",
-                  style: GoogleFonts.ramabhadra(
-                    fontSize: 24,
-                  ),
-                ),
-                SizedBox(
                   height: 16,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 350,
-                  child: ListView(
-                    // This next line does the trick.
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      for (int i = 0; i < demo.length; i++)
-                        FeaturedCard(feature: demo[i])
-                    ],
-                  ),
+                Text(
+                  this.widget.projModel.projectDescription,
+                  style: GoogleFonts.prompt(
+                      fontSize: 14, fontWeight: FontWeight.w300),
+                ),
+                SizedBox(
+                  height: 32,
                 ),
                 SizedBox(
                   height: 48,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    children: [
-                      Text(
-                        "Contact us",
-                        style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 32,
-                            color: Color(0xFF4CBC9A)),
-                      ),
-                      Text(
-                        "Get in touch with us through...",
-                        style: GoogleFonts.poppins(
-                            fontSize: 16, color: Color(0xFFC9C9C9)),
-                      ),
-                      SizedBox(
-                        height: 32,
-                      ),
-                      Container(
-                          width: 48,
-                          height: 48,
-                          child: Image.asset(
-                            "./assets/icons/phone.png",
-                            fit: BoxFit.contain,
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        this.widget.ngoModel.mobile,
-                        style: GoogleFonts.poppins(
-                            fontSize: 18, color: Color(0xFF4CBC9A)),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          width: 48,
-                          height: 48,
-                          child: Image.asset(
-                            "./assets/icons/email.png",
-                            fit: BoxFit.contain,
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        this.widget.ngoModel.email,
-                        style: GoogleFonts.poppins(
-                            fontSize: 18, color: Color(0xFF4CBC9A)),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          width: 48,
-                          height: 48,
-                          child: Image.asset(
-                            "./assets/icons/location.png",
-                            fit: BoxFit.contain,
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        this.widget.ngoModel.location,
-                        style: GoogleFonts.poppins(
-                            fontSize: 18, color: Color(0xFF4CBC9A)),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        width: 400,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Container(
-                                width: 48,
-                                height: 48,
-                                child: Image.asset(
-                                  "./assets/icons/twitter.png",
-                                  fit: BoxFit.contain,
-                                )),
-                            Container(
-                                width: 48,
-                                height: 48,
-                                child: Image.asset(
-                                  "./assets/icons/insta.png",
-                                  fit: BoxFit.contain,
-                                )),
-                            Container(
-                                width: 48,
-                                height: 48,
-                                child: Image.asset(
-                                  "./assets/icons/fb.png",
-                                  fit: BoxFit.contain,
-                                )),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 100,
-                      ),
-                    ],
-                  ),
+                SizedBox(
+                  height: 100,
                 )
               ],
             ),
@@ -245,7 +94,7 @@ class _ProjectPageState extends State<ProjectPage> {
                 width: MediaQuery.of(context).size.width,
                 height: 200,
                 child: Image.asset(
-                  this.widget.ngoModel.ngo_image_url,
+                  this.widget.projModel.projectBackdrop,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -264,7 +113,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                 Border.all(width: 2, color: Color(0xFF4CBC9A))),
                         child: ClipOval(
                           child: Image.asset(
-                            this.widget.ngoModel.ngo_image_url,
+                            this.widget.projModel.ngoDp,
                             fit: BoxFit.cover,
                           ),
                         ),
