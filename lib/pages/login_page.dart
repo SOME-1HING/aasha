@@ -1,6 +1,8 @@
 import 'package:aasha/components/filled_text_field.dart';
+import 'package:aasha/provider/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -92,7 +94,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                final provider =
+                    Provider.of<GoogleSignInProvider>(context, listen: false);
+                provider.googleLogin();
+              },
               icon: Icon(Icons.login),
               label: Text("Log in with Google"))
         ],
