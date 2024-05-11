@@ -1,5 +1,7 @@
 import 'package:aasha/components/bottom_nav.dart';
+import 'package:aasha/components/featured_card.dart';
 import 'package:aasha/components/top_story.dart';
+import 'package:aasha/module/featured_card_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,6 +18,27 @@ class _HomePageState extends State<HomePage> {
   bool isNotification = false;
   late bool isPanelOpen;
   late final PanelController panelController;
+
+  final List<Featured> demo = [
+    Featured(
+        handle: "dhatripatra",
+        handleUrl: "./assets/images/logo.png",
+        imgUrl: "./assets/images/home_top.png",
+        title: "Empowering hearts to end hunger, one donation at a time",
+        uid: "fehfiu3ggug2f9udg9ug"),
+    Featured(
+        handle: "dhatripatra",
+        handleUrl: "./assets/images/logo.png",
+        imgUrl: "./assets/images/home_top.png",
+        title: "fcre hearts to end hunger, one donation at a time",
+        uid: "fehfiu3ggug2f9udg9ug"),
+    Featured(
+        handle: "dhatripatra",
+        handleUrl: "./assets/images/logo.png",
+        imgUrl: "./assets/images/home_top.png",
+        title: "Empowering hearts to end hunger, one donation at a time",
+        uid: "fehfiu3ggug2f9udg9ug"),
+  ];
 
   @override
   void initState() {
@@ -188,6 +211,12 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(
                                 height: 14,
                               ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView(
+                            children: [
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 26.0),
@@ -218,56 +247,41 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(
                                 height: 14,
                               ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Featured goals",
-                                style: GoogleFonts.ramabhadra(
-                                  fontSize: 24,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 12,
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 200,
-                                child: ListView(
-                                  // This next line does the trick.
-                                  scrollDirection: Axis.horizontal,
-                                  children: <Widget>[
-                                    Container(
-                                      width: 160,
-                                      color: Colors.red,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Featured goals",
+                                      style: GoogleFonts.ramabhadra(
+                                        fontSize: 24,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 12,
                                     ),
                                     Container(
-                                      width: 160,
-                                      color: Colors.blue,
-                                    ),
-                                    Container(
-                                      width: 160,
-                                      color: Colors.green,
-                                    ),
-                                    Container(
-                                      width: 160,
-                                      color: Colors.yellow,
-                                    ),
-                                    Container(
-                                      width: 160,
-                                      color: Colors.orange,
-                                    ),
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 350,
+                                      child: ListView(
+                                        // This next line does the trick.
+                                        scrollDirection: Axis.horizontal,
+                                        children: <Widget>[
+                                          for (int i = 0; i < demo.length; i++)
+                                            FeaturedCard(feature: demo[i])
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: 80,
+                        )
                       ],
                     ),
                   );
