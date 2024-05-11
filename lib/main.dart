@@ -11,9 +11,6 @@ import 'provider/google_sign_in.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(const MyApp());
 }
 
@@ -27,29 +24,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => GoogleSignInProvider(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Aasha',
-        home: Scaffold(
-          body: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasData) {
-                return HomePage();
-              } else if (snapshot.hasError) {
-                return const Center(
-                  child: Text("Something went wrong."),
-                );
-              } else {
-                return const LoginPage();
-              }
-            },
-          ),
-        ),
-      ));
+        create: (context) => GoogleSignInProvider(),
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Aasha',
+            home: HomePage()),
+      );
 }
