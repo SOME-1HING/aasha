@@ -1,22 +1,45 @@
 # Aasha
 
-Our platform streamlines the project submission process for entrepreneurs, ensuring a seamless experience from start to finish. With just a few simple steps, entrepreneurs can submit their projects with ease, eliminating unnecessary barriers to entry.
+Aasha is a social entrepreneurship and social wellbeing project which aims to benefit society by accepting donations to financially support on-going drives such as feeding the poor, animal welfare for a society, etc. The project also is of keen interest to entrepreneurs who The platform streamlines the project submission process for entrepreneurs, ensuring a seamless experience from start to finish. With just a few simple steps, entrepreneurs can submit their projects with ease, eliminating unnecessary barriers to entry.
 
 ## Key Features
 
-- *Seamless Project Submission:* Entrepreneurs can easily submit their projects through our intuitive interface, reducing the time and effort required to get started.
+- _Seamless Project Submission:_ Entrepreneurs can easily connect to NGOs and propose and pitch their ideas which may benefit the entrepreneur as well as the society. Entrepreneurs can connect to NGOs through our application's intuitive interface, which brings them the ability to find several NGOs they might be interested in, right at their fingertips.
 
-- *NGO Verification:* Projects undergo thorough verification by NGOs to ensure legitimacy and impact. This process enhances transparency and instils confidence in potential investors.
+- _NGO Verification:_ Projects undergo thorough verification by NGOs to ensure legitimacy and impact. This process enhances transparency and instills confidence in potential investors.
 
-- *Empowering ROI Calculator:* Our integrated ROI calculator empowers investors to make informed decisions by providing insights into projected returns. Investors can assess the potential financial benefits of supporting a project before making any commitments.
+- _Empowering ROI Calculator:_ Besides being a "society-first" approach app, Aasha also is equipped with an AI based ROI calculator which helps investors to evaluate projects worth investing into, and make informed decisions.
 
-## Getting Started
+## Tech Stack
 
-To get started with our platform, simply sign up and begin exploring the seamless project submission process. Entrepreneurs can submit their projects, which will undergo NGO verification before being showcased to potential investors. Investors can use the ROI calculator to evaluate projects and make informed investment decisions.
+- Graphics Design: Figma & Canva
+- Mobile Application: Flutter
+- Backend: Firebase Firestore
+- ROI Insights: Google Gemini
+- ROI Insights Backend:
+  - Docker
+  - FastAPI
+  - Uvicorn
+  - Oracle DB
 
-## Contributing
+> [! Note]
+> [Backend code can be found at: [Aasha Backend](https://github.com/SOME-1HING/aasha-backend)]
 
-We welcome contributions from the community to enhance and improve our platform. Whether it's providing feedback, suggesting new features, or contributing code, your input is invaluable in driving our mission forward.
+## User Guide
+
+    - Step 1:
+        Download the apk from the [link](https://drive.google.com/file/d/1oGNWREracl9V-Xb_LQxqwereRVpx-0vI/view?usp=sharing)
+    - Step 2:
+        Navigate to the downloaded APK click on it to launch your application installer. Allow installation from unknown sources if prompted and allow internet permissions for enabling communication to the API.
+    - Step 3:
+        You'll be greeted with a screen, where you will be shown NGOs active in your area, and social goodwill drives initiated by your fellow society members.
+    - Step 4: You can donate to the drives, or you can propose your own project by clicking on the "Propose a Project" button.
+
+## Contributions
+
+- Yash Prakash
+- Anandhu Krishna
+- Shakir Ali
 
 ## Acknowledgements
 
