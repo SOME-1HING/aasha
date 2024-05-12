@@ -2,6 +2,8 @@ import 'package:aasha/components/featured_card.dart';
 import 'package:aasha/module/featured_card_model.dart';
 import 'package:aasha/module/ngo_model.dart';
 import 'package:aasha/module/project_model.dart';
+import 'package:aasha/pages/roi_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -53,7 +55,16 @@ class _ProjectPageState extends State<ProjectPage> {
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(16),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RoiPage(
+                                  projDesc:
+                                      this.widget.projModel.projectDescription,
+                                  projName: this.widget.projModel.projectName,
+                                )));
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(

@@ -4,6 +4,7 @@ import 'package:aasha/pages/ngo_profile.dart';
 import 'package:aasha/pages/project_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeaturedCard extends StatefulWidget {
   final ProjectModel feature;
@@ -17,6 +18,15 @@ class _FeaturedCardState extends State<FeaturedCard> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<void> _launchInBrowser(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   @override
@@ -102,7 +112,9 @@ class _FeaturedCardState extends State<FeaturedCard> {
                 height: 10,
               ),
               InkWell(
-                onTap: () {},
+                onTap: () async {
+                  await _launchInBrowser(this.widget.feature.projectUrl);
+                },
                 child: Container(
                     alignment: Alignment.center,
                     width: 300,

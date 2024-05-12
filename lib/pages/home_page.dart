@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   late List<NgoModel> ngoList = [];
+  late List<NgoModel> rev_ngoList = [];
   late List<ProjectModel> projList = [];
 
   Future<void> getDb() async {
@@ -93,6 +94,7 @@ class _HomePageState extends State<HomePage> {
 
       setState(() {
         ngoList = pi;
+        rev_ngoList = pi.reversed.toList();
       });
     });
   }
@@ -128,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     image: AssetImage(
                       "./assets/images/home_top.png",
                     ),
-                    opacity: const AlwaysStoppedAnimation(.5),
+                    opacity: const AlwaysStoppedAnimation(.9),
                     width: MediaQuery.of(context).size.width,
                     height: 400,
                     fit: BoxFit.cover,
@@ -474,7 +476,7 @@ class _HomePageState extends State<HomePage> {
                                                     MainAxisAlignment
                                                         .spaceEvenly,
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
                                                     height: 150,
@@ -513,7 +515,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 200,
                                     child: ListView.separated(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: ngoList.length,
+                                      itemCount: rev_ngoList.length,
                                       separatorBuilder: (context, index) =>
                                           Container(
                                               width: 25,
@@ -523,7 +525,7 @@ class _HomePageState extends State<HomePage> {
                                                     MainAxisAlignment
                                                         .spaceEvenly,
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
                                                     height: 150,
@@ -535,7 +537,7 @@ class _HomePageState extends State<HomePage> {
                                               )), // Adjust separator width as needed
                                       itemBuilder: (context, index) {
                                         return NgoCard(
-                                          ngoModel: ngoList[index],
+                                          ngoModel: rev_ngoList[index],
                                         );
                                       },
                                     ),
