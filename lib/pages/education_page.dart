@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HealthPage extends StatefulWidget {
-  const HealthPage({super.key});
+class EducationPage extends StatefulWidget {
+  const EducationPage({super.key});
 
   @override
-  State<HealthPage> createState() => _HealthPageState();
+  State<EducationPage> createState() => _EducationPageState();
 }
 
-class _HealthPageState extends State<HealthPage> {
+class _EducationPageState extends State<EducationPage> {
   List<DonationModel> demo = [
     DonationModel(
         donation_img: "./assets/images/logo.png",
@@ -98,15 +98,15 @@ class _HealthPageState extends State<HealthPage> {
                   },
                   icon: Icon(
                     Icons.chevron_left,
-                    color: Color(0xFFF78456),
+                    color: Color(0xFF4CBC9A),
                     size: 48,
                   )),
               Text(
-                "Healing Hope",
+                "For the Scholars",
                 style: GoogleFonts.prompt(
                     fontSize: 32,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFFF78456)),
+                    color: Color(0xFF4CBC9A)),
               )
             ]),
           ),

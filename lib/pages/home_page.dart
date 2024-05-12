@@ -3,6 +3,8 @@ import 'package:aasha/components/ngo_card.dart';
 import 'package:aasha/components/top_story.dart';
 import 'package:aasha/module/featured_card_model.dart';
 import 'package:aasha/module/ngo_model.dart';
+import 'package:aasha/pages/animal_page.dart';
+import 'package:aasha/pages/education_page.dart';
 import 'package:aasha/pages/health_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -218,7 +220,13 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 )),
                                             InkWell(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              EducationPage()));
+                                                },
                                                 child: Container(
                                                   child: Column(
                                                     mainAxisAlignment:
@@ -274,7 +282,13 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 )),
                                             InkWell(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              AnimalPage()));
+                                                },
                                                 child: Container(
                                                   child: Column(
                                                     mainAxisAlignment:
