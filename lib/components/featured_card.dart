@@ -15,6 +15,11 @@ class FeaturedCard extends StatefulWidget {
 
 class _FeaturedCardState extends State<FeaturedCard> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 12.0),
@@ -24,17 +29,8 @@ class _FeaturedCardState extends State<FeaturedCard> {
               context,
               MaterialPageRoute(
                   builder: (context) => ProjectPage(
-                          projModel: ProjectModel(
-                        projectId: "3re24243242",
-                        projectName: "feegrfgreg",
-                        projectUrl: "fergfe.com",
-                        projectDescription:
-                            'Working as a professional in India involves huge responsibilities. For example, a person who has recently joined as a newcomer will take time to understand the dynamics of salary, the tax structure, monthly/yearly deductions, etc. At the same time, a person who has been working for a long time will surely have much more knowledge about the basics of this but might not be up to date in terms of knowing all the current financial conditions in the industry.\nNow, the people stuck in both categories, require some outside assistance to not prevent themselves from any sort of fraud in terms of investment, buying numerous policies through different agents, and getting scammed with their savings. This digital innovation is a very important thing but at the same time, it gives a very big platform to defaulters to ruin the mental peace of hardworking employees and play with their hard-earned money. In all this, the Insurance sector is one major thing.\nMedical policies or education policies are important aspects that an individual thinks about buying as it is substantial for emergency cases. ‘Insurance Samadhan’ is an online space that will guide you through this hectic insurance scheme and policy with trust.',
-                        projectBackdrop: "./assets/images/home_top.png",
-                        ngoId: "ferfe3r3",
-                        ngoName: "f38YG*GF*7g2",
-                        ngoDp: "./assets/images/logo.png",
-                      ))));
+                        projModel: this.widget.feature,
+                      )));
         },
         child: Container(
           padding: EdgeInsets.all(8),
@@ -48,6 +44,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
                 color: Color(0xFFE2EFFF),
               )),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
@@ -55,7 +52,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
                   height: 150,
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
+                      child: Image.network(
                         this.widget.feature.projectBackdrop,
                         fit: BoxFit.cover,
                       ))),
@@ -67,9 +64,9 @@ class _FeaturedCardState extends State<FeaturedCard> {
                       width: 36,
                       height: 36,
                       child: ClipOval(
-                        child: Image.asset(
+                        child: Image.network(
                           fit: BoxFit.cover,
-                          "./assets/images/cuss.png",
+                          this.widget.feature.ngoDp,
                         ),
                       ),
                     ),
@@ -85,6 +82,7 @@ class _FeaturedCardState extends State<FeaturedCard> {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     this.widget.feature.projectName,

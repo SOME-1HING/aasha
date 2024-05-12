@@ -104,7 +104,7 @@ class _AnimalPageState extends State<AnimalPage> {
               Text(
                 "Pay for a Paw",
                 style: GoogleFonts.prompt(
-                    fontSize: 32,
+                    fontSize: 24,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFFFF6668)),
               )

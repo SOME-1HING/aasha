@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EducationPage extends StatefulWidget {
-  const EducationPage({super.key});
+class TopStoryPage extends StatefulWidget {
+  const TopStoryPage({super.key});
 
   @override
-  State<EducationPage> createState() => _EducationPageState();
+  State<TopStoryPage> createState() => _TopStoryPageState();
 }
 
-class _EducationPageState extends State<EducationPage> {
+class _TopStoryPageState extends State<TopStoryPage> {
   List<DonationModel> demo = [
     DonationModel(
         donation_img: "./assets/images/logo.png",
@@ -98,15 +98,15 @@ class _EducationPageState extends State<EducationPage> {
                   },
                   icon: Icon(
                     Icons.chevron_left,
-                    color: Color(0xFF4CBC9A),
+                    color: Color(0xFF04BFCD),
                     size: 48,
                   )),
               Text(
-                "For the Scholars",
+                "Top Stories",
                 style: GoogleFonts.prompt(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFF4CBC9A)),
+                    color: Color(0xFF04BFCD)),
               )
             ]),
           ),

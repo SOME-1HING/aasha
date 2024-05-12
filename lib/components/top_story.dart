@@ -32,24 +32,24 @@ class _TopStoryState extends State<TopStory> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Heading",
+                      "Pune Based Savings Firm",
                       style: GoogleFonts.ramabhadra(
-                        fontSize: 22,
+                        fontSize: 18,
                       ),
                     ),
                     Text(
-                      "An inspirational individual who triumphed with resilience, winning a gold medal in the Paralympic Games.",
+                      "Dive Money: Savings at 9% Interest Rate by Anandu Nair & Diti Tanna, GenZ Building for GenZ. Welcome to the future of saving.",
                       style: GoogleFonts.prompt(fontSize: 12),
                     ),
                     Row(
                       children: [
                         Container(
-                          width: 36,
-                          height: 36,
+                          width: 28,
+                          height: 28,
                           child: ClipOval(
                             child: Image.asset(
                               fit: BoxFit.cover,
-                              "./assets/images/home_top.png",
+                              "./assets/icons/Dive.png",
                             ),
                           ),
                         ),
@@ -57,7 +57,7 @@ class _TopStoryState extends State<TopStory> {
                           width: 10,
                         ),
                         Text(
-                          "dhatripatra",
+                          "Dive",
                           style: GoogleFonts.prompt(fontSize: 16),
                         ),
                       ],
@@ -66,13 +66,13 @@ class _TopStoryState extends State<TopStory> {
                 ),
               ),
               SizedBox(
-                width: 135,
+                width: 125,
                 height: 175,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
                     fit: BoxFit.cover,
-                    "./assets/images/home_top.png",
+                    "./assets/images/placeholder.png",
                   ),
                 ),
               )

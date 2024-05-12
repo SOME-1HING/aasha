@@ -95,7 +95,7 @@ class _ProjectPageState extends State<ProjectPage> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 200,
-                child: Image.asset(
+                child: Image.network(
                   this.widget.projModel.projectBackdrop,
                   fit: BoxFit.cover,
                 ),
@@ -115,7 +115,7 @@ class _ProjectPageState extends State<ProjectPage> {
                             border:
                                 Border.all(width: 2, color: Color(0xFF4CBC9A))),
                         child: ClipOval(
-                          child: Image.asset(
+                          child: Image.network(
                             this.widget.projModel.ngoDp,
                             fit: BoxFit.cover,
                           ),

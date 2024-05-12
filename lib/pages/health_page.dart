@@ -104,7 +104,7 @@ class _HealthPageState extends State<HealthPage> {
               Text(
                 "Healing Hope",
                 style: GoogleFonts.prompt(
-                    fontSize: 32,
+                    fontSize: 24,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFFF78456)),
               )

@@ -1,8 +1,11 @@
 import 'package:aasha/components/featured_card.dart';
 import 'package:aasha/module/featured_card_model.dart';
 import 'package:aasha/module/ngo_model.dart';
+import 'package:aasha/module/project_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NgoProfile extends StatefulWidget {
   final NgoModel ngoModel;
@@ -27,6 +30,15 @@ class _NgoProfileState extends State<NgoProfile> {
     });
   }
 
+  Future<void> _launchInBrowser(String url) async {
+    if (!await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   final List<Featured> demo = [
     Featured(
         handle: "dhatripatra",
@@ -47,6 +59,44 @@ class _NgoProfileState extends State<NgoProfile> {
         title: "Empowering hearts to end hunger, one donation at a time",
         uid: "fehfiu3ggug2f9udg9ug"),
   ];
+  late List<ProjectModel> projList = [];
+  Future<void> queryDb() async {
+    List<String> ids = this.widget.ngoModel.projects;
+    List<ProjectModel> li = [];
+    var db = FirebaseFirestore.instance;
+    for (int i = 0; i < ids.length; i++) {
+      await db.collection("projects").get().then((event) {
+        for (var doc in event.docs) {
+          if (doc.id == ids[i]) {
+            var data = doc.data();
+            var x = ProjectModel(
+                projectId: doc.id,
+                projectName: data["projectName"],
+                projectUrl: data["projectUrl"],
+                projectDescription: data["projectDescription"],
+                projectBackdrop: data["projectBackdrop"],
+                ngoId: data["ngoId"],
+                ngoName: data["ngoName"],
+                ngoDp: data["ngoDp"]);
+
+            li.add(x);
+            break;
+          }
+        }
+
+        setState(() {
+          projList = li;
+        });
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    queryDb();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +136,9 @@ class _NgoProfileState extends State<NgoProfile> {
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(16),
-                  onTap: () {},
+                  onTap: () async {
+                    await _launchInBrowser(this.widget.ngoModel.ngo_website);
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
@@ -116,8 +168,8 @@ class _NgoProfileState extends State<NgoProfile> {
                     // This next line does the trick.
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
-                      // for (int i = 0; i < demo.length; i++)
-                      //   FeaturedCard(feature: demo[i])
+                      for (int i = 0; i < projList.length; i++)
+                        FeaturedCard(feature: projList[i])
                     ],
                   ),
                 ),
@@ -244,7 +296,7 @@ class _NgoProfileState extends State<NgoProfile> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 height: 200,
-                child: Image.asset(
+                child: Image.network(
                   this.widget.ngoModel.ngo_image_url,
                   fit: BoxFit.cover,
                 ),
@@ -263,7 +315,7 @@ class _NgoProfileState extends State<NgoProfile> {
                             border:
                                 Border.all(width: 2, color: Color(0xFF4CBC9A))),
                         child: ClipOval(
-                          child: Image.asset(
+                          child: Image.network(
                             this.widget.ngoModel.ngo_image_url,
                             fit: BoxFit.cover,
                           ),

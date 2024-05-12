@@ -3,9 +3,13 @@ import 'package:aasha/components/ngo_card.dart';
 import 'package:aasha/components/top_story.dart';
 import 'package:aasha/module/featured_card_model.dart';
 import 'package:aasha/module/ngo_model.dart';
+import 'package:aasha/module/project_model.dart';
+import 'package:aasha/pages/about_page.dart';
 import 'package:aasha/pages/animal_page.dart';
 import 'package:aasha/pages/education_page.dart';
+import 'package:aasha/pages/faq_page.dart';
 import 'package:aasha/pages/health_page.dart';
+import 'package:aasha/pages/top_story_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,89 +41,66 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  late List<Featured> demo;
+  late List<NgoModel> ngoList = [];
+  late List<ProjectModel> projList = [];
 
-  final List<NgoModel> ngoDemo = [
-    NgoModel(
-        ngo_image_url: "./assets/images/home_top.png",
-        name: "HopeLink Foundation",
-        location: "Mumbai, India",
-        description:
-            "\"Bringing hope to every corner of Mumbai. Join us in our mission to uplift lives, one heart at a time. Together, we're making a difference. 💙 #HopeLinkFoundation #MumbaiCares\"",
-        is_verified: true,
-        mobile: "+913425424234",
-        email: "fregvedsgfd@ghibjfid.com",
-        ngo_website: "https://dwefcw.com",
-        twitter_url: "fgrgr.com",
-        insta_url: "fedfe.com",
-        fb_url: "ferdedv.com",
-        uid: "234ewy72t7qw8sy8qg82"),
-    NgoModel(
-        ngo_image_url: "./assets/images/home_top.png",
-        name: "Hfefedf",
-        location: "fgrgr",
-        description: "fregvdcdvx",
-        is_verified: true,
-        mobile: "+913425424234",
-        email: "fregvedsgfd@ghibjfid.com",
-        ngo_website: "https://dwefcw.com",
-        twitter_url: "fgrgr.com",
-        insta_url: "fedfe.com",
-        fb_url: "ferdedv.com",
-        uid: "234ewy72t7qw8sy8qg82"),
-    NgoModel(
-        ngo_image_url: "./assets/images/home_top.png",
-        name: "Hfefedf",
-        location: "fgrgr",
-        description: "fregvdcdvx",
-        is_verified: true,
-        mobile: "+913425424234",
-        email: "fregvedsgfd@ghibjfid.com",
-        ngo_website: "https://dwefcw.com",
-        twitter_url: "fgrgr.com",
-        insta_url: "fedfe.com",
-        fb_url: "ferdedv.com",
-        uid: "234ewy72t7qw8sy8qg82"),
-    NgoModel(
-        ngo_image_url: "./assets/images/home_top.png",
-        name: "Hfefedf",
-        location: "fgrgr",
-        description: "fregvdcdvx",
-        is_verified: true,
-        mobile: "+913425424234",
-        email: "fregvedsgfd@ghibjfid.com",
-        ngo_website: "https://dwefcw.com",
-        twitter_url: "fgrgr.com",
-        insta_url: "fedfe.com",
-        fb_url: "ferdedv.com",
-        uid: "234ewy72t7qw8sy8qg82"),
-    NgoModel(
-        ngo_image_url: "./assets/images/home_top.png",
-        name: "Hfefedf",
-        location: "fgrgr",
-        description: "fregvdcdvx",
-        is_verified: true,
-        mobile: "+913425424234",
-        email: "fregvedsgfd@ghibjfid.com",
-        ngo_website: "https://dwefcw.com",
-        twitter_url: "fgrgr.com",
-        insta_url: "fedfe.com",
-        fb_url: "ferdedv.com",
-        uid: "234ewy72t7qw8sy8qg82"),
-  ];
+  Future<void> getDb() async {
+    List<ProjectModel> li = [];
+    List<NgoModel> pi = [];
 
-  void getDb() async {
     var db = FirebaseFirestore.instance;
 
     await db.collection("projects").get().then((event) {
       for (var doc in event.docs) {
-        print("${doc.id} => ${doc.data()}");
+        var data = doc.data();
+        var x = ProjectModel(
+            projectId: doc.id,
+            projectName: data["projectName"],
+            projectUrl: data["projectUrl"],
+            projectDescription: data["projectDescription"],
+            projectBackdrop: data["projectBackdrop"],
+            ngoId: data["ngoId"],
+            ngoName: data["ngoName"],
+            ngoDp: data["ngoDp"]);
+
+        li.add(x);
       }
+
+      setState(() {
+        projList = li;
+      });
+    });
+    await db.collection("ngos").get().then((event) {
+      for (var doc in event.docs) {
+        var data = doc.data();
+
+        var x = NgoModel(
+            ngo_image_url: data["ngoDp"],
+            name: data["ngoName"],
+            location: data["ngoLocation"],
+            description: data["ngoDescription"],
+            mobile: data["ngoMobile"],
+            email: data["ngoEmail"],
+            ngo_website: data["ngoWebsite"],
+            twitter_url: data["ngoTwitter"],
+            insta_url: data["ngoInsta"],
+            fb_url: data["ngoFb"],
+            uid: data["ngoDp"],
+            projects: (data["ngoProject"] as String).split(","));
+
+        pi.add(x);
+      }
+
+      setState(() {
+        ngoList = pi;
+      });
     });
   }
 
   @override
   void initState() {
+    getDb();
+
     setState(() {
       panelController = PanelController();
       isPanelOpen = false;
@@ -129,7 +110,7 @@ class _HomePageState extends State<HomePage> {
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: Colors.black,
         systemNavigationBarIconBrightness: Brightness.light));
-    getDb();
+
     super.initState();
   }
 
@@ -149,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     opacity: const AlwaysStoppedAnimation(.5),
                     width: MediaQuery.of(context).size.width,
+                    height: 400,
                     fit: BoxFit.cover,
                   ),
                   SlidingUpPanel(
@@ -170,6 +152,43 @@ class _HomePageState extends State<HomePage> {
                               topRight: Radius.circular(32),
                               topLeft: Radius.circular(32)),
                       controller: panelController,
+                      header: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ForceDraggableWidget(
+                              child: SizedBox(
+                                width: 100,
+                                height: 40,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const SizedBox(
+                                      height: 12.0,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Container(
+                                          width: 30,
+                                          height: 7,
+                                          decoration: const BoxDecoration(
+                                              color: Colors.blueAccent,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(12.0))),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       panelBuilder: () {
                         return Padding(
                           padding: EdgeInsets.only(
@@ -189,36 +208,11 @@ class _HomePageState extends State<HomePage> {
                                     Container(
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 26.0),
+                                            horizontal: 36.0),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            InkWell(
-                                                onTap: () {},
-                                                child: Container(
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Image.asset(
-                                                        "./assets/icons/menu/menu1.png",
-                                                        width: 50,
-                                                        height: 50,
-                                                        fit: BoxFit.contain,
-                                                      ),
-                                                      Text(
-                                                        "All",
-                                                        style:
-                                                            GoogleFonts.roboto(
-                                                                fontSize: 16,
-                                                                color: Color(
-                                                                    0xFF9CA5BB)),
-                                                      )
-                                                    ],
-                                                  ),
-                                                )),
                                             InkWell(
                                                 onTap: () {
                                                   Navigator.push(
@@ -340,11 +334,20 @@ class _HomePageState extends State<HomePage> {
                                               fontSize: 24,
                                             ),
                                           ),
-                                          Text(
-                                            "View all",
-                                            style: GoogleFonts.roboto(
-                                                fontSize: 16,
-                                                color: Color(0xFF4CBC9A)),
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TopStoryPage()));
+                                            },
+                                            child: Text(
+                                              "View all",
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 16,
+                                                  color: Color(0xFF4CBC9A)),
+                                            ),
                                           )
                                         ],
                                       ),
@@ -377,14 +380,19 @@ class _HomePageState extends State<HomePage> {
                                                 .width,
                                             height: 350,
                                             child: ListView(
-                                              // This next line does the trick.
                                               scrollDirection: Axis.horizontal,
-                                              children: <Widget>[
-                                                /*        for (int i = 0;
-                                                    i < demo.length;
-                                                    i++)
-                                                  FeaturedCard(feature: demo[i])*/
-                                              ],
+                                              children: (projList.isNotEmpty)
+                                                  ? List.generate(
+                                                      projList.length,
+                                                      (index) => FeaturedCard(
+                                                          feature:
+                                                              projList[index]),
+                                                    ).toList()
+                                                  : [
+                                                      Center(
+                                                          child:
+                                                              CircularProgressIndicator())
+                                                    ],
                                             ),
                                           )
                                         ],
@@ -414,20 +422,6 @@ class _HomePageState extends State<HomePage> {
                             icon: Image.asset(
                               color: isPanelOpen ? Colors.black : Colors.white,
                               "./assets/icons/menu.png",
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isNotification = !isNotification;
-                              });
-                            },
-                            icon: Image.asset(
-                              color: isPanelOpen ? Colors.black : Colors.white,
-                              isNotification
-                                  ? "./assets/icons/notifi2.png"
-                                  : "./assets/icons/notifi1.png",
-                              scale: 0.7,
                             ),
                           ),
                         ]),
@@ -470,7 +464,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 200,
                                     child: ListView.separated(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: ngoDemo.length,
+                                      itemCount: ngoList.length,
                                       separatorBuilder: (context, index) =>
                                           Container(
                                               width: 25,
@@ -492,7 +486,7 @@ class _HomePageState extends State<HomePage> {
                                               )), // Adjust separator width as needed
                                       itemBuilder: (context, index) {
                                         return NgoCard(
-                                          ngoModel: ngoDemo[index],
+                                          ngoModel: ngoList[index],
                                         );
                                       },
                                     ),
@@ -519,7 +513,7 @@ class _HomePageState extends State<HomePage> {
                                     height: 200,
                                     child: ListView.separated(
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: ngoDemo.length,
+                                      itemCount: ngoList.length,
                                       separatorBuilder: (context, index) =>
                                           Container(
                                               width: 25,
@@ -541,7 +535,7 @@ class _HomePageState extends State<HomePage> {
                                               )), // Adjust separator width as needed
                                       itemBuilder: (context, index) {
                                         return NgoCard(
-                                          ngoModel: ngoDemo[index],
+                                          ngoModel: ngoList[index],
                                         );
                                       },
                                     ),
@@ -663,32 +657,6 @@ class _HomePageState extends State<HomePage> {
               top: kToolbarHeight + MediaQuery.of(context).padding.top),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            SizedBox(
-                width: 64,
-                height: 64,
-                child: ClipOval(
-                    child: Image.asset(
-                  "./assets/images/home_top.png",
-                  fit: BoxFit.cover,
-                ))),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Rohit Sharma",
-              style: GoogleFonts.prompt(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white),
-            ),
-            Text(
-              "heyrohithh@gmail.com",
-              style: GoogleFonts.prompt(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w200,
-                  letterSpacing: 0.2,
-                  color: Colors.white),
-            ),
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Column(
@@ -725,65 +693,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(14),
-                    onTap: () {},
-                    splashColor: Colors.white.withOpacity(0.5),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: (currActivePage == "Settings")
-                            ? Colors.white.withOpacity(0.3)
-                            : Colors.transparent,
-                      ),
-                      padding: EdgeInsets.only(left: 10),
-                      alignment: Alignment.centerLeft,
-                      height: 60,
-                      width: 200,
-                      child: Text(
-                        "Settings",
-                        style: GoogleFonts.prompt(
-                            fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                    width: 200,
-                    child: Divider(
-                      color: Colors.white.withOpacity(0.5),
-                    ),
-                  ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(14),
-                    onTap: () {},
-                    splashColor: Colors.white.withOpacity(0.5),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: (currActivePage == "My Activities")
-                            ? Colors.white.withOpacity(0.3)
-                            : Colors.transparent,
-                      ),
-                      padding: EdgeInsets.only(left: 10),
-                      alignment: Alignment.centerLeft,
-                      height: 60,
-                      width: 200,
-                      child: Text(
-                        "My Activities",
-                        style: GoogleFonts.prompt(
-                            fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                    width: 200,
-                    child: Divider(
-                      color: Colors.white.withOpacity(0.5),
-                    ),
-                  ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(14),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AboutPage()));
+                    },
                     splashColor: Colors.white.withOpacity(0.5),
                     child: Container(
                       decoration: BoxDecoration(
@@ -812,7 +725,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   InkWell(
                     borderRadius: BorderRadius.circular(14),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FAQPage()));
+                    },
                     splashColor: Colors.white.withOpacity(0.5),
                     child: Container(
                       decoration: BoxDecoration(
@@ -838,27 +754,6 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 100,
             ),
-            InkWell(
-              onTap: () {},
-              child: SizedBox(
-                height: 50,
-                width: 200,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Log Out",
-                      style:
-                          GoogleFonts.prompt(fontSize: 18, color: Colors.white),
-                    ),
-                    Icon(
-                      Icons.logout,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
-              ),
-            )
           ]),
         ),
       ),

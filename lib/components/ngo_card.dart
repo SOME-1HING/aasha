@@ -35,7 +35,7 @@ class _NgoCardState extends State<NgoCard> {
                   borderRadius: BorderRadius.circular(84),
                   border: Border.all(width: 2, color: Color(0xFF4CBC9A))),
               child: ClipOval(
-                child: Image.asset(
+                child: Image.network(
                   this.widget.ngoModel.ngo_image_url,
                   fit: BoxFit.cover,
                 ),
