@@ -1,5 +1,6 @@
 import 'package:aasha/module/ngo_model.dart';
 import 'package:aasha/pages/ngo_profile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -2,7 +2,9 @@ import 'package:aasha/components/featured_card.dart';
 import 'package:aasha/module/featured_card_model.dart';
 import 'package:aasha/module/ngo_model.dart';
 import 'package:aasha/module/project_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -254,27 +256,45 @@ class _NgoProfileState extends State<NgoProfile> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Container(
-                                width: 48,
-                                height: 48,
-                                child: Image.asset(
-                                  "./assets/icons/twitter.png",
-                                  fit: BoxFit.contain,
-                                )),
-                            Container(
-                                width: 48,
-                                height: 48,
-                                child: Image.asset(
-                                  "./assets/icons/insta.png",
-                                  fit: BoxFit.contain,
-                                )),
-                            Container(
-                                width: 48,
-                                height: 48,
-                                child: Image.asset(
-                                  "./assets/icons/fb.png",
-                                  fit: BoxFit.contain,
-                                )),
+                            InkWell(
+                              onTap: () async {
+                                await _launchInBrowser(
+                                    this.widget.ngoModel.twitter_url);
+                              },
+                              child: Container(
+                                  width: 48,
+                                  height: 48,
+                                  child: Image.asset(
+                                    "./assets/icons/twitter.png",
+                                    fit: BoxFit.contain,
+                                  )),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                await _launchInBrowser(
+                                    this.widget.ngoModel.insta_url);
+                              },
+                              child: Container(
+                                  width: 48,
+                                  height: 48,
+                                  child: Image.asset(
+                                    "./assets/icons/insta.png",
+                                    fit: BoxFit.contain,
+                                  )),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                await _launchInBrowser(
+                                    this.widget.ngoModel.fb_url);
+                              },
+                              child: Container(
+                                  width: 48,
+                                  height: 48,
+                                  child: Image.asset(
+                                    "./assets/icons/fb.png",
+                                    fit: BoxFit.contain,
+                                  )),
+                            )
                           ],
                         ),
                       ),
